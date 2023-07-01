@@ -1,6 +1,6 @@
 # Rohin Nanavati
 
-![My photo](./Profile.jpeg)
+![My photo](./Profile.jpeg){: width="200px" height="200px"}
 
 ## About Me
 
