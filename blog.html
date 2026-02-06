@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thoughts | ML Engineer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="brand-icon">🧠</span>
+            <span class="brand-text">neural.human</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="blog.html" class="active">Thoughts</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <main class="page-content">
+        <div class="container">
+            <header class="page-header">
+                <h1 class="page-title">
+                    <span class="title-icon">💭</span>
+                    Thoughts & Threads
+                </h1>
+                <p class="page-subtitle">Ideas, explorations, and things I'm thinking about</p>
+            </header>
+
+            <!-- Thread Filter -->
+            <div class="thread-filters">
+                <button class="filter-btn active" data-filter="all">All Threads</button>
+                <button class="filter-btn" data-filter="ml">🤖 ML Insights</button>
+                <button class="filter-btn" data-filter="healthcare">🏥 Healthcare AI</button>
+                <button class="filter-btn" data-filter="sports">⚽ Sports Analytics</button>
+                <button class="filter-btn" data-filter="learning">🧠 How Networks Learn</button>
+            </div>
+
+            <div class="threads-container">
+                <!-- Thread 1: Healthcare AI -->
+                <article class="thread-card" data-category="healthcare" id="thread-healthcare-ai">
+                    <div class="thread-header">
+                        <div class="thread-meta">
+                            <span class="thread-emoji">🏥</span>
+                            <span class="thread-category">Healthcare AI</span>
+                            <span class="thread-date">January 2026</span>
+                        </div>
+                        <span class="thread-count">3 posts</span>
+                    </div>
+                    <h2 class="thread-title">Why Healthcare is ML's Greatest Frontier</h2>
+                    <p class="thread-preview">
+                        Exploring why I believe healthcare represents the most impactful application 
+                        of machine learning, and what we need to get there...
+                    </p>
+                    <div class="thread-posts">
+                        <div class="thread-post">
+                            <div class="post-number">1/3</div>
+                            <div class="post-content">
+                                <p>
+                                    When people ask me why I'm so focused on healthcare AI, I start with a simple thought experiment: 
+                                    <strong>What if every person on Earth had access to the world's best diagnostic capabilities?</strong>
+                                </p>
+                                <p>
+                                    Right now, medical expertise is scarce and unevenly distributed. A patient in rural areas 
+                                    might not have access to the same quality of diagnosis as someone in a major city. 
+                                    ML can change this fundamentally.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="thread-post">
+                            <div class="post-number">2/3</div>
+                            <div class="post-content">
+                                <p>
+                                    The challenges are real though. Healthcare AI isn't just about accuracy—it's about:
+                                </p>
+                                <ul>
+                                    <li>🔒 <strong>Privacy</strong>: Patient data is sensitive. Federated learning and differential privacy aren't optional.</li>
+                                    <li>📊 <strong>Explainability</strong>: Doctors need to understand WHY a model made a prediction.</li>
+                                    <li>⚖️ <strong>Fairness</strong>: Models trained on biased data can perpetuate health disparities.</li>
+                                    <li>✅ <strong>Validation</strong>: Clinical validation is rigorous for good reason.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="thread-post">
+                            <div class="post-number">3/3</div>
+                            <div class="post-content">
+                                <p>
+                                    Despite the challenges, I remain optimistic. We're seeing real progress:
+                                </p>
+                                <p>
+                                    Early detection of diabetic retinopathy, skin cancer screening, predicting patient deterioration... 
+                                    These aren't research papers anymore—they're saving lives.
+                                </p>
+                                <p>
+                                    The question isn't <em>if</em> AI will transform healthcare. It's <em>how we ensure it benefits everyone</em>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="thread-toggle" aria-expanded="false">
+                        <span class="toggle-text">Read Thread</span>
+                        <span class="toggle-icon">↓</span>
+                    </button>
+                </article>
+
+                <!-- Thread 2: How Networks Learn -->
+                <article class="thread-card" data-category="learning" id="thread-learning">
+                    <div class="thread-header">
+                        <div class="thread-meta">
+                            <span class="thread-emoji">🧠</span>
+                            <span class="thread-category">How Networks Learn</span>
+                            <span class="thread-date">December 2025</span>
+                        </div>
+                        <span class="thread-count">4 posts</span>
+                    </div>
+                    <h2 class="thread-title">The Mystery of Neural Network Learning</h2>
+                    <p class="thread-preview">
+                        We've built incredibly powerful systems, but do we truly understand how they learn? 
+                        Some late-night thoughts on bridging AI and neuroscience...
+                    </p>
+                    <div class="thread-posts">
+                        <div class="thread-post">
+                            <div class="post-number">1/4</div>
+                            <div class="post-content">
+                                <p>
+                                    Here's something that keeps me up at night: <strong>We don't fully understand how our own creations learn.</strong>
+                                </p>
+                                <p>
+                                    We know backpropagation works. We know gradient descent finds minima. 
+                                    But the "why" behind generalization, the emergence of features, the lottery ticket hypothesis... 
+                                    there's still so much mystery.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="thread-post">
+                            <div class="post-number">2/4</div>
+                            <div class="post-content">
+                                <p>
+                                    What fascinates me is comparing artificial and biological learning:
+                                </p>
+                                <p>
+                                    🧬 <strong>Biological neurons</strong>: Local learning rules, sparse activations, continuous adaptation<br>
+                                    🤖 <strong>Artificial neurons</strong>: Global error signals, dense computations, discrete training phases
+                                </p>
+                                <p>
+                                    Why did we diverge so much from biology? And what might we gain by converging back?
+                                </p>
+                            </div>
+                        </div>
+                        <div class="thread-post">
+                            <div class="post-number">3/4</div>
+                            <div class="post-content">
+                                <p>
+                                    Some directions I find exciting:
+                                </p>
+                                <ul>
+                                    <li>🔄 <strong>Hebbian learning</strong>: "Neurons that fire together, wire together" — can we integrate this?</li>
+                                    <li>⚡ <strong>Spiking neural networks</strong>: Temporal dynamics like real neurons</li>
+                                    <li>😴 <strong>Sleep and memory consolidation</strong>: What if models need "rest" to generalize?</li>
+                                    <li>🎯 <strong>Attention as selective processing</strong>: Our brains don't process everything equally</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="thread-post">
+                            <div class="post-number">4/4</div>
+                            <div class="post-content">
+                                <p>
+                                    I don't think the goal is to perfectly replicate brains—evolution optimized for different constraints than we have.
+                                </p>
+                                <p>
+                                    But I do think there's wisdom in biology we haven't fully tapped. The brain learns continuously, 
+                                    efficiently, and from remarkably little data compared to our models.
+                                </p>
+                                <p>
+                                    <strong>Making AI more "human" isn't about consciousness—it's about learning efficiency, adaptability, and robustness.</strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="thread-toggle" aria-expanded="false">
+                        <span class="toggle-text">Read Thread</span>
+                        <span class="toggle-icon">↓</span>
+                    </button>
+                </article>
+
+                <!-- Thread 3: Sports Analytics -->
+                <article class="thread-card" data-category="sports" id="thread-sports">
+                    <div class="thread-header">
+                        <div class="thread-meta">
+                            <span class="thread-emoji">⚽</span>
+                            <span class="thread-category">Sports Analytics</span>
+                            <span class="thread-date">November 2025</span>
+                        </div>
+                        <span class="thread-count">3 posts</span>
+                    </div>
+                    <h2 class="thread-title">The Beautiful Game, Quantified</h2>
+                    <p class="thread-preview">
+                        Football and tennis through the lens of data science. Where passion meets patterns...
+                    </p>
+                    <div class="thread-posts">
+                        <div class="thread-post">
+                            <div class="post-number">1/3</div>
+                            <div class="post-content">
+                                <p>
+                                    There's something magical about sports analytics: it's where my ML skills meet my genuine passion. 
+                                    ⚽🎾
+                                </p>
+                                <p>
+                                    When I watch a match, I can't help but see it as a complex system—passes as edges in a graph, 
+                                    player positions as time series, tactical decisions as sequential choices.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="thread-post">
+                            <div class="post-number">2/3</div>
+                            <div class="post-content">
+                                <p>
+                                    Some questions I love exploring:
+                                </p>
+                                <ul>
+                                    <li>🎾 Can we predict serve patterns from historical data and in-match adjustments?</li>
+                                    <li>⚽ What makes a pressing system effective? (Hint: it's about network disruption)</li>
+                                    <li>📊 How do we quantify "chemistry" between players?</li>
+                                    <li>🔮 Can we identify undervalued players before the market does?</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="thread-post">
+                            <div class="post-number">3/3</div>
+                            <div class="post-content">
+                                <p>
+                                    The fun part? Sports data is relatively clean, outcomes are measurable, and the feedback loop is fast.
+                                </p>
+                                <p>
+                                    It's a perfect playground for ML experimentation. And if my models can help my favorite team win? 
+                                    That's just a bonus. 😄
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="thread-toggle" aria-expanded="false">
+                        <span class="toggle-text">Read Thread</span>
+                        <span class="toggle-icon">↓</span>
+                    </button>
+                </article>
+
+                <!-- Thread 4: ML Insights -->
+                <article class="thread-card" data-category="ml" id="thread-ml-tips">
+                    <div class="thread-header">
+                        <div class="thread-meta">
+                            <span class="thread-emoji">🤖</span>
+                            <span class="thread-category">ML Insights</span>
+                            <span class="thread-date">October 2025</span>
+                        </div>
+                        <span class="thread-count">3 posts</span>
+                    </div>
+                    <h2 class="thread-title">Lessons from the Trenches</h2>
+                    <p class="thread-preview">
+                        Things I wish I knew earlier about building ML systems in the real world...
+                    </p>
+                    <div class="thread-posts">
+                        <div class="thread-post">
+                            <div class="post-number">1/3</div>
+                            <div class="post-content">
+                                <p>
+                                    <strong>Lesson #1: Data quality > Model complexity</strong>
+                                </p>
+                                <p>
+                                    I've seen teams spend months on architecture tweaks when the real problem was noisy labels. 
+                                    A simple model on clean data often beats a complex model on messy data.
+                                </p>
+                                <p>
+                                    Before reaching for the latest paper, ask: "Have I really understood my data?"
+                                </p>
+                            </div>
+                        </div>
+                        <div class="thread-post">
+                            <div class="post-number">2/3</div>
+                            <div class="post-content">
+                                <p>
+                                    <strong>Lesson #2: Your training pipeline is your product</strong>
+                                </p>
+                                <p>
+                                    Models are temporary. The pipeline that produces them is permanent. 
+                                    Invest in reproducibility, versioning, and monitoring early.
+                                </p>
+                                <p>
+                                    Future you will thank present you when something breaks at 2 AM.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="thread-post">
+                            <div class="post-number">3/3</div>
+                            <div class="post-content">
+                                <p>
+                                    <strong>Lesson #3: Explain before you deploy</strong>
+                                </p>
+                                <p>
+                                    If you can't explain your model's decisions to a non-technical stakeholder, 
+                                    you're not ready to deploy it. This isn't just ethics—it's debugging.
+                                </p>
+                                <p>
+                                    The process of explaining often reveals edge cases you hadn't considered.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="thread-toggle" aria-expanded="false">
+                        <span class="toggle-text">Read Thread</span>
+                        <span class="toggle-icon">↓</span>
+                    </button>
+                </article>
+            </div>
+
+            <!-- How to Add Threads Guide (hidden by default, shown when needed) -->
+            <div class="add-thread-guide">
+                <h3>📝 Want to add a new thread?</h3>
+                <p>Check out the <code>threads/</code> folder and follow the template!</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Built with ☕ and curiosity</p>
+            <p class="footer-tagline">Making machines learn, one neuron at a time 🧠</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
