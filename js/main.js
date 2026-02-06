@@ -286,17 +286,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
    CONSOLE EASTER EGG 🥚
    ======================================== */
 console.log(`
-%c🧠 neural.human
+%c🧠 Rohin Nanavati
 
 %cHey there, curious dev! 👋
 
 If you're reading this, you probably share my love for 
 understanding how things work under the hood.
 
-Let's connect and talk about:
-- Making AI more human
-- Healthcare ML
-- Why backprop is still kind of magical
+At the end of the day, it's all neurons connecting 
+in beautiful ways.
+
+Let's connect:
+- LinkedIn: linkedin.com/in/rohinnanavati
+- Email: rohinpn@gmail.com
 
 Built with vanilla JS, CSS, and a whole lot of ☕
 
