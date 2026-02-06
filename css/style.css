@@ -526,10 +526,10 @@ body {
     animation: float 6s ease-in-out infinite;
 }
 
-.badge-1 { top: 10%; left: -20%; animation-delay: 0s; }
-.badge-2 { top: 30%; right: -30%; animation-delay: 1s; }
-.badge-3 { bottom: 30%; left: -30%; animation-delay: 2s; }
-.badge-4 { bottom: 10%; right: -20%; animation-delay: 3s; }
+.badge-1 { top: 5%; right: 10%; animation-delay: 0s; }
+.badge-2 { top: 25%; right: -15%; animation-delay: 1s; }
+.badge-3 { bottom: 25%; right: -10%; animation-delay: 2s; }
+.badge-4 { bottom: 5%; right: 15%; animation-delay: 3s; }
 
 @keyframes float {
     0%, 100% { transform: translateY(0); }
