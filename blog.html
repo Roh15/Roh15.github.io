@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
@@ -42,60 +42,97 @@
             <!-- Thread Filter -->
             <div class="thread-filters">
                 <button class="filter-btn active" data-filter="all">All Threads</button>
-                <button class="filter-btn" data-filter="placeholder">💭 Coming Soon</button>
+                <button class="filter-btn" data-filter="research">🔬 Research</button>
+                <button class="filter-btn" data-filter="sports">⚽ Sports</button>
             </div>
 
             <div class="threads-container">
-                <!-- Thread 1: Lorem Ipsum -->
-                <article class="thread-card" data-category="placeholder" id="thread-lorem-1">
+                <!-- Thread: Latent Agent Communication -->
+                <article class="thread-card" data-category="research" id="thread-agentlang-latent">
                     <div class="thread-header">
                         <div class="thread-meta">
-                            <span class="thread-emoji">💭</span>
-                            <span class="thread-category">Coming Soon</span>
-                            <span class="thread-date">February 2026</span>
+                            <span class="thread-emoji">🤖</span>
+                            <span class="thread-category">Research · Inference</span>
+                            <span class="thread-date">April 2026</span>
                         </div>
-                        <span class="thread-count">3 posts</span>
+                        <span class="thread-count">5 posts</span>
                     </div>
-                    <h2 class="thread-title">Lorem Ipsum Dolor Sit Amet</h2>
+                    <h2 class="thread-title">Latent Agent Communication: Eliminating Redundant Prefill in Multi-Agent LLM Pipelines</h2>
                     <p class="thread-preview">
-                        Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore 
-                        et dolore magna aliqua...
+                        Every agent handoff in a same-model pipeline re-computes what the previous agent already did.
+                        6 experiments. 325 timed runs. 6.74× prefill speedup. Here's what we found...
                     </p>
                     <div class="thread-posts">
                         <div class="thread-post">
-                            <div class="post-number">1/3</div>
+                            <div class="post-number">1/5</div>
                             <div class="post-content">
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                    <strong>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</strong>
+                                    <strong>The hidden tax in multi-agent pipelines.</strong> When Agent A finishes and hands off to
+                                    Agent B, standard practice decodes A's output to text — then Agent B re-tokenizes and
+                                    re-prefills the entire sequence before generating its first token.
                                 </p>
                                 <p>
-                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi 
-                                    ut aliquip ex ea commodo consequat.
+                                    That computation is identical to what Agent A already did. In a 4-hop pipeline,
+                                    you pay for 3 full wasted prefills. At production scale this is not a rounding error.
                                 </p>
                             </div>
                         </div>
                         <div class="thread-post">
-                            <div class="post-number">2/3</div>
+                            <div class="post-number">2/5</div>
                             <div class="post-content">
                                 <p>
-                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore:
+                                    <strong>The fix is conceptually simple: pass the KV cache directly.</strong> Instead of decoding
+                                    Agent A's output to text and re-prefilling, extract the KV slice corresponding to A's
+                                    generation tokens and hand it to Agent B. Agent B only prefills its own system prompt (~41 tokens).
+                                </p>
+                                <p>
+                                    The primitive required from a provider is minimal: a <code style="background:rgba(99,102,241,0.1);color:var(--primary-light);padding:2px 6px;border-radius:4px;font-family:var(--font-mono);font-size:0.85em;">session_id</code> field on inference calls —
+                                    enough to route chained calls to the same GPU process. One critical detail: RoPE positional
+                                    encodings must be re-indexed or generation immediately fails.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="thread-post">
+                            <div class="post-number">3/5</div>
+                            <div class="post-content">
+                                <p>
+                                    <strong>The numbers, measured on Jetson AGX Orin with Qwen2.5 models:</strong>
                                 </p>
                                 <ul>
-                                    <li>🔹 <strong>Excepteur</strong>: Sint occaecat cupidatat non proident.</li>
-                                    <li>🔹 <strong>Sunt</strong>: In culpa qui officia deserunt mollit anim.</li>
-                                    <li>🔹 <strong>Laborum</strong>: Et dolorum fuga perspiciatis unde.</li>
+                                    <li>🔹 <strong>EXP-001</strong>: 3.22× speedup on 3B model, 20 runs, CV &lt;1% — baseline confirmed</li>
+                                    <li>🔹 <strong>EXP-002</strong>: Without RoPE re-indexing, generation immediately breaks — non-negotiable</li>
+                                    <li>🔹 <strong>EXP-003</strong>: Savings scale with context length — 1.0× at 50 tokens, up to 66× at 4,000 tokens</li>
+                                    <li>🔹 <strong>EXP-004</strong>: 6.74× on the 7B model — speedup grows with model size as expected</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="thread-post">
-                            <div class="post-number">3/3</div>
+                            <div class="post-number">4/5</div>
                             <div class="post-content">
                                 <p>
-                                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
+                                    <strong>Transfer cost is the key engineering question.</strong> In-process KV cache clone: 1.4 ms —
+                                    just 0.2% of the 581 ms prefill saving. Cross-process via shared memory: 73 ms, still only
+                                    12.6% of the saving.
                                 </p>
                                 <p>
-                                    Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+                                    Real providers using CUDA IPC (same GPU, different process) would pay ~14 µs — under 0.01%.
+                                    Quality held: 30/30 tests across 5 cross-process runs.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="thread-post">
+                            <div class="post-number">5/5</div>
+                            <div class="post-content">
+                                <p>
+                                    <strong>The provider argument.</strong> A 4-hop pipeline saves ~1.7 seconds of prefill per call
+                                    (3 hops × ~580 ms/hop). At 10M calls/day, that's roughly 4,850 GPU-hours/day of
+                                    avoidable compute. The 6.74× speedup ratio is the hardware-agnostic result —
+                                    it scales with model size and context length, not with Jetson's absolute timing.
+                                </p>
+                                <p>
+                                    <em>Rule of thumb: build this when prior_context_tokens / system_prompt_tokens &gt; 3.
+                                    Most real agent pipelines naturally exceed this ratio.</em>
+                                    <a href="reports/agentlang-latent-comms.html" style="color:var(--primary-light);text-decoration:none;"> Read the full report →</a>
                                 </p>
                             </div>
                         </div>
@@ -106,89 +143,82 @@
                     </button>
                 </article>
 
-                <!-- Thread 2: Lorem Ipsum -->
-                <article class="thread-card" data-category="placeholder" id="thread-lorem-2">
+                <!-- Thread: Man United xG Analysis -->
+                <article class="thread-card" data-category="sports" id="thread-futbol-man-utd-2526">
                     <div class="thread-header">
                         <div class="thread-meta">
-                            <span class="thread-emoji">✨</span>
-                            <span class="thread-category">Coming Soon</span>
-                            <span class="thread-date">January 2026</span>
+                            <span class="thread-emoji">⚽</span>
+                            <span class="thread-category">Sports · Data Journalism</span>
+                            <span class="thread-date">April 2026</span>
                         </div>
-                        <span class="thread-count">2 posts</span>
+                        <span class="thread-count">4 posts</span>
                     </div>
-                    <h2 class="thread-title">Neque Porro Quisquam Est</h2>
+                    <h2 class="thread-title">Carrick, AFCON, and the Question of Genuine Progress at Manchester United</h2>
                     <p class="thread-preview">
-                        Qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...
+                        Carrick's United have more points than Amorim's. The xG data tells a much more
+                        complicated story about what's actually happening at Old Trafford...
                     </p>
                     <div class="thread-posts">
                         <div class="thread-post">
-                            <div class="post-number">1/2</div>
+                            <div class="post-number">1/4</div>
                             <div class="post-content">
                                 <p>
-                                    <strong>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</strong>
+                                    <strong>Three events collided at the same moment.</strong> Amorim sacked on 5 January.
+                                    AFCON 2025 running 21 Dec – 18 Jan, taking Amad Diallo and Bryan Mbeumo out
+                                    for five Premier League matches. Carrick appointed 13 January — inheriting a squad
+                                    about to get its two best players back.
                                 </p>
                                 <p>
-                                    Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi 
-                                    architecto beatae vitae dicta sunt explicabo.
+                                    The question the data needs to answer: is Carrick's improvement real, or were
+                                    United always going to look better once the AFCON players returned — whoever
+                                    was in the dugout?
                                 </p>
                             </div>
                         </div>
                         <div class="thread-post">
-                            <div class="post-number">2/2</div>
+                            <div class="post-number">2/4</div>
                             <div class="post-content">
                                 <p>
-                                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, 
-                                    sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+                                    <strong>The points picture looks compelling — until you look at xPts.</strong>
                                 </p>
+                                <ul>
+                                    <li>🔹 <strong>Amorim</strong>: 31 actual pts from 20 games — almost exactly matching his 32.9 xPts deserved</li>
+                                    <li>🔹 <strong>Carrick</strong>: 26 actual pts from 12 games — massively over-performing his 18.6 xPts</li>
+                                </ul>
                                 <p>
-                                    <em>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.</em>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="thread-toggle" aria-expanded="false">
-                        <span class="toggle-text">Read Thread</span>
-                        <span class="toggle-icon">↓</span>
-                    </button>
-                </article>
-
-                <!-- Thread 3: Lorem Ipsum -->
-                <article class="thread-card" data-category="placeholder" id="thread-lorem-3">
-                    <div class="thread-header">
-                        <div class="thread-meta">
-                            <span class="thread-emoji">🚀</span>
-                            <span class="thread-category">Coming Soon</span>
-                            <span class="thread-date">December 2025</span>
-                        </div>
-                        <span class="thread-count">2 posts</span>
-                    </div>
-                    <h2 class="thread-title">At Vero Eos Et Accusamus</h2>
-                    <p class="thread-preview">
-                        Et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum 
-                        deleniti atque corrupti...
-                    </p>
-                    <div class="thread-posts">
-                        <div class="thread-post">
-                            <div class="post-number">1/2</div>
-                            <div class="post-content">
-                                <p>
-                                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis 
-                                    praesentium voluptatum deleniti atque corrupti quos dolores.
-                                </p>
-                                <p>
-                                    Et quas molestias excepturi sint occaecati cupiditate non provident.
+                                    That +7.4 point gap over 12 matches is an outlier. Amorim was getting what his
+                                    performances merited. Carrick is getting far more than his.
                                 </p>
                             </div>
                         </div>
                         <div class="thread-post">
-                            <div class="post-number">2/2</div>
+                            <div class="post-number">3/4</div>
                             <div class="post-content">
                                 <p>
-                                    Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum 
-                                    et dolorum fuga.
+                                    <strong>AFCON did hurt Amorim — and the magnitude is significant.</strong> Looking at the
+                                    four AFCON-depleted matches in isolation: xPts/game dropped from 1.71 (Amorim with
+                                    full squad) to 1.39 (Amorim without Amad/Mbeumo). Carrick's full-squad xPts/game
+                                    is 1.55 — lower than Amorim's full-squad number.
                                 </p>
                                 <p>
-                                    <strong>Et harum quidem rerum facilis est et expedita distinctio.</strong>
+                                    On underlying performance metrics, <em>Amorim's United with a full squad was
+                                    outperforming Carrick's United.</em>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="thread-post">
+                            <div class="post-number">4/4</div>
+                            <div class="post-content">
+                                <p>
+                                    <strong>The confound cannot be resolved — and that's the honest conclusion.</strong>
+                                    Carrick took charge on 13 January. Amad and Mbeumo returned on 17 January.
+                                    There is exactly one Carrick match without them and zero Amorim matches after their return.
+                                </p>
+                                <p>
+                                    The data cannot separate the manager effect from the player availability effect.
+                                    Carrick's superior points come from a historically large over-performance on xG
+                                    that is unlikely to sustain.
+                                    <a href="reports/futbol-man-utd-2526.html" style="color:var(--primary-light);text-decoration:none;"> Read the full analysis →</a>
                                 </p>
                             </div>
                         </div>
@@ -200,11 +230,6 @@
                 </article>
             </div>
 
-            <!-- How to Add Threads Guide (hidden by default, shown when needed) -->
-            <div class="add-thread-guide">
-                <h3>📝 Want to add a new thread?</h3>
-                <p>Check out the <code>threads/</code> folder and follow the template!</p>
-            </div>
         </div>
     </main>
 

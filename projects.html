@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
@@ -42,98 +42,74 @@
             <!-- Filter Buttons -->
             <div class="project-filters">
                 <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="placeholder">🚀 Coming Soon</button>
+                <button class="filter-btn" data-filter="sports">⚽ Sports</button>
+                <button class="filter-btn" data-filter="research">🔬 Research</button>
             </div>
 
             <div class="projects-grid">
-                <!-- Placeholder Project 1 -->
-                <article class="project-card" data-category="placeholder">
+                <!-- Project: Carrick, AFCON, and the Question of Genuine Progress -->
+                <article class="project-card" data-category="sports">
                     <div class="project-header">
-                        <span class="project-emoji">🚀</span>
+                        <span class="project-emoji">⚽</span>
                         <div class="project-tags">
-                            <span class="tag tag-research">Coming Soon</span>
+                            <span class="tag tag-sports">Sports</span>
+                            <span class="tag tag-analytics">Analytics</span>
                         </div>
                     </div>
-                    <h3 class="project-title">Lorem Ipsum Project Alpha</h3>
+                    <h3 class="project-title">Carrick, AFCON, and the Question of Genuine Progress</h3>
                     <p class="project-description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                        Manchester United sacked Amorim, appointed Carrick, and immediately looked transformed.
+                        Match-level xG data and Poisson expected points separate manager effect from player
+                        availability — the answer is more uncomfortable than the table suggests.
                     </p>
                     <div class="project-tech">
-                        <span>Lorem</span>
-                        <span>Ipsum</span>
-                        <span>Dolor</span>
-                        <span>Sit</span>
+                        <span>Python</span>
+                        <span>Plotly</span>
+                        <span>soccerdata</span>
+                        <span>Understat</span>
+                        <span>FBref</span>
                     </div>
                     <div class="project-links">
-                        <a href="#" class="project-link">
-                            <span>Coming Soon</span>
+                        <a href="reports/futbol-man-utd-2526.html" class="project-link">
+                            <span>View Report</span>
                             <span>→</span>
                         </a>
                     </div>
                 </article>
 
-                <!-- Placeholder Project 2 -->
-                <article class="project-card" data-category="placeholder">
+                <!-- Project: Latent Agent Communication -->
+                <article class="project-card" data-category="research">
                     <div class="project-header">
-                        <span class="project-emoji">✨</span>
+                        <span class="project-emoji">🤖</span>
                         <div class="project-tags">
-                            <span class="tag tag-research">Coming Soon</span>
+                            <span class="tag tag-research">Research</span>
+                            <span class="tag tag-dl">Inference</span>
                         </div>
                     </div>
-                    <h3 class="project-title">Lorem Ipsum Project Beta</h3>
+                    <h3 class="project-title">Latent Agent Communication: Eliminating Redundant Prefill</h3>
                     <p class="project-description">
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-                        eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+                        Every agent handoff in a same-model pipeline re-computes work the previous agent already did.
+                        6 experiments on a Jetson AGX Orin with Qwen2.5 models — 6.74× prefill speedup at 0.2% transfer cost.
                     </p>
                     <div class="project-tech">
-                        <span>Amet</span>
-                        <span>Consectetur</span>
-                        <span>Adipiscing</span>
+                        <span>PyTorch</span>
+                        <span>Qwen2.5</span>
+                        <span>CUDA</span>
+                        <span>Jetson AGX Orin</span>
+                        <span>Plotly</span>
                     </div>
                     <div class="project-links">
-                        <a href="#" class="project-link">
-                            <span>Coming Soon</span>
+                        <a href="reports/agentlang-latent-comms.html" class="project-link">
+                            <span>View Report</span>
                             <span>→</span>
+                        </a>
+                        <a href="https://github.com/rohinnanavati/agentLang" class="project-link github-link" target="_blank">
+                            <span>GitHub</span>
+                            <span>↗</span>
                         </a>
                     </div>
                 </article>
 
-                <!-- Placeholder Project 3 -->
-                <article class="project-card" data-category="placeholder">
-                    <div class="project-header">
-                        <span class="project-emoji">🔮</span>
-                        <div class="project-tags">
-                            <span class="tag tag-research">Coming Soon</span>
-                        </div>
-                    </div>
-                    <h3 class="project-title">Lorem Ipsum Project Gamma</h3>
-                    <p class="project-description">
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium 
-                        doloremque laudantium, totam rem aperiam eaque ipsa.
-                    </p>
-                    <div class="project-tech">
-                        <span>Elit</span>
-                        <span>Tempor</span>
-                        <span>Incididunt</span>
-                        <span>Labore</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="project-link">
-                            <span>Coming Soon</span>
-                            <span>→</span>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Add More Projects Card -->
-                <article class="project-card add-project-card">
-                    <div class="add-project-content">
-                        <span class="add-icon">✨</span>
-                        <h3>More Coming Soon!</h3>
-                        <p>Always working on something new...</p>
-                    </div>
-                </article>
             </div>
         </div>
     </main>

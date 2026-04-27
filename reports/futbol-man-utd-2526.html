@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manchester United 2025/26: Carrick, AFCON, and the Question of Genuine Progress</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Georgia', serif;
+    background: #f9f9f7;
+    color: #1a1a1a;
+    line-height: 1.75;
+}
+
+.page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+}
+
+header {
+    border-bottom: 3px solid #1a1a1a;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+header .kicker {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #c0392b;
+    margin-bottom: 0.6rem;
+}
+
+h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+}
+
+header .deck {
+    font-size: 1.15rem;
+    color: #444;
+    font-style: italic;
+}
+
+header .byline {
+    margin-top: 1rem;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.82rem;
+    color: #777;
+}
+
+h2 {
+    font-size: 1.45rem;
+    font-weight: 700;
+    margin: 2.8rem 0 0.8rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #ddd;
+}
+
+h3 {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #555;
+    margin: 2rem 0 0.5rem;
+}
+
+p { margin-bottom: 1.1rem; }
+
+.lede {
+    font-size: 1.12rem;
+    color: #333;
+    margin-bottom: 1.4rem;
+}
+
+.chart-block {
+    margin: 2rem -1rem;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    overflow: hidden;
+    padding: 1rem 0.5rem 0;
+}
+
+.chart-caption {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.8rem;
+    color: #777;
+    padding: 0.4rem 1.2rem 1rem;
+    border-top: 1px solid #eee;
+    margin-top: 0.25rem;
+}
+
+.stat-row {
+    display: flex;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.stat-card {
+    flex: 1;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    text-align: center;
+}
+
+.stat-card .value {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.stat-card .label {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888;
+    margin-top: 0.3rem;
+}
+
+.stat-card.red .value { color: #c0392b; }
+.stat-card.green .value { color: #27ae60; }
+.stat-card.grey .value { color: #555; }
+
+.callout {
+    background: #fff8e1;
+    border-left: 4px solid #f39c12;
+    padding: 1rem 1.2rem;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+}
+
+.callout strong { color: #c0392b; }
+
+.methodology {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #ddd;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.82rem;
+    color: #777;
+    line-height: 1.6;
+}
+
+.methodology h3 {
+    font-size: 0.82rem;
+    color: #777;
+    margin-bottom: 0.5rem;
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+    <div class="kicker">Data Analysis · Premier League 2025/26</div>
+    <h1>Carrick, AFCON, and the Question of Genuine Progress</h1>
+    <div class="deck">
+        Manchester United sacked Ruben Amorim in January, appointed Michael Carrick,
+        and immediately looked transformed. But how much of that transformation is real?
+    </div>
+    <div class="byline">Data from Understat &amp; FBref &nbsp;·&nbsp; Analysis via xG and Poisson expected points</div>
+</header>
+
+<p class="lede">
+    When Michael Carrick took over Manchester United on 13 January 2026, the club had just
+    sacked Ruben Amorim after 14 months. Results under Carrick improved sharply — but the
+    timing of his appointment overlapped almost perfectly with the Africa Cup of Nations ending
+    and United's two most influential players, Amad Diallo and Bryan Mbeumo, returning
+    from international duty. This analysis uses match-level xG data and lineup records
+    to separate what we can and cannot attribute to the new manager.
+</p>
+
+<h2>Setting the Scene</h2>
+
+<p>
+    Three events defined United's season around the turn of 2026. Amorim was sacked on
+    5 January after a run of poor results and a public falling-out with club leadership.
+    AFCON 2025 ran from 21 December to 18 January, taking Amad Diallo (Ivory Coast)
+    and Bryan Mbeumo (Cameroon) out of the squad for five Premier League matches —
+    four under Amorim, one under caretaker Darren Fletcher. And Carrick arrived on 13 January,
+    inheriting a squad that was about to get two of its best players back.
+</p>
+
+<p>
+    The question the data needs to answer is whether Carrick's improved results reflect
+    better management, or whether United were always going to look better once the AFCON
+    players returned — whoever was in the dugout.
+</p>
+
+<div class="chart-block">
+<div>                            <div id="a5518e27-0c90-4d2e-9ccc-0e51d8961039" class="plotly-graph-div" style="height:460px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("a5518e27-0c90-4d2e-9ccc-0e51d8961039")) {                    Plotly.newPlot(                        "a5518e27-0c90-4d2e-9ccc-0e51d8961039",                        [{"hoverinfo":"skip","line":{"color":"rgba(0,0,0,0)"},"showlegend":false,"x":["2025-08-17T00:00:00","2025-08-24T00:00:00","2025-08-30T00:00:00","2025-09-14T00:00:00","2025-09-20T00:00:00","2025-09-27T00:00:00","2025-10-04T00:00:00","2025-10-19T00:00:00","2025-10-25T00:00:00","2025-11-01T00:00:00","2025-11-08T00:00:00","2025-11-24T00:00:00","2025-11-30T00:00:00","2025-12-04T00:00:00","2025-12-08T00:00:00","2025-12-15T00:00:00","2025-12-21T00:00:00","2025-12-26T00:00:00","2025-12-30T00:00:00","2026-01-04T00:00:00","2026-01-07T00:00:00","2026-01-17T00:00:00","2026-01-25T00:00:00","2026-02-01T00:00:00","2026-02-07T00:00:00","2026-02-10T00:00:00","2026-02-23T00:00:00","2026-03-01T00:00:00","2026-03-04T00:00:00","2026-03-15T00:00:00","2026-03-20T00:00:00","2026-04-13T00:00:00","2026-04-18T00:00:00"],"y":{"dtype":"f8","bdata":"9Wc\u002fUkQG9j9O7ncoCnT6P2WlSSnoFhBA2\u002fl+arz0\u002fz\u002fesG1RZoP1P3iXi\u002fhOTAZA\u002fyH99nXg\u002fj+pvB3htOAEQPbRqSufZf8\u002fHXIz3IDP+D\u002fl1TkGZK\u002f1P1RSJ6CJMAJAoBUYsroVAUDY9Qt2wzYCQMcuUb01MBBA\u002fIwLB0KyCUAOoUrNHuj9PzElkuhlFPI\u002flSu8y0V88z\u002fuJY3ROir\u002fP4mYEkn0MgRATGw+rg2VCEBFgT6RJ8n2PzoGZK93f\u002f0\u002fM+GX+nlTAUAlQE0tW+v0P\u002fXb14FzRvc\u002f98d71crEAkBKXp1jQHb\u002fP0SoUrMH2vo\u002fFeP8TShE\u002fD\u002fO34RCBJwHQOW4UzpYf\u002fQ\u002f"},"type":"scatter"},{"fill":"tonexty","fillcolor":"rgba(46,204,113,0.18)","hoverinfo":"skip","line":{"color":"rgba(0,0,0,0)"},"showlegend":false,"x":["2025-08-17T00:00:00","2025-08-24T00:00:00","2025-08-30T00:00:00","2025-09-14T00:00:00","2025-09-20T00:00:00","2025-09-27T00:00:00","2025-10-04T00:00:00","2025-10-19T00:00:00","2025-10-25T00:00:00","2025-11-01T00:00:00","2025-11-08T00:00:00","2025-11-24T00:00:00","2025-11-30T00:00:00","2025-12-04T00:00:00","2025-12-08T00:00:00","2025-12-15T00:00:00","2025-12-21T00:00:00","2025-12-26T00:00:00","2025-12-30T00:00:00","2026-01-04T00:00:00","2026-01-07T00:00:00","2026-01-17T00:00:00","2026-01-25T00:00:00","2026-02-01T00:00:00","2026-02-07T00:00:00","2026-02-10T00:00:00","2026-02-23T00:00:00","2026-03-01T00:00:00","2026-03-04T00:00:00","2026-03-15T00:00:00","2026-03-20T00:00:00","2026-04-13T00:00:00","2026-04-18T00:00:00"],"y":{"dtype":"f8","bdata":"DJOpglFJ9T9O7ncoCnT6P5y\u002fCYUIOPU\u002f2\u002fl+arz0\u002fz8wStBf6BHeP3iXi\u002fhOTAZA\u002f12fOevT6T+pvB3htOAEQJbRyOcVT+4\u002fHXIz3IDP+D\u002fl1TkGZK\u002f1Pzrq6Lga2cM\u002foBUYsroVAUAmGTkLe9r1Pxam7zUEx9A\u002fVACMZ9DQAkAOoUrNHuj9PzElkuhlFPI\u002flSu8y0V88z9Ma9PYXgvvP\u002fUQje4gdtQ\u002fou4DkNrE2D9FgT6RJ8n2P6JinL8Jhfs\u002fRBmqYir94j8lQE0tW+v0PwBUceMW8+E\u002fKnPzjeie2D9KXp1jQHb\u002fP+UK73IRX\u002fM\u002fFeP8TShE\u002fD\u002fO34RCBJwHQOW4UzpYf\u002fQ\u002f"},"type":"scatter"},{"hoverinfo":"skip","line":{"color":"rgba(0,0,0,0)"},"showlegend":false,"x":["2025-08-17T00:00:00","2025-08-24T00:00:00","2025-08-30T00:00:00","2025-09-14T00:00:00","2025-09-20T00:00:00","2025-09-27T00:00:00","2025-10-04T00:00:00","2025-10-19T00:00:00","2025-10-25T00:00:00","2025-11-01T00:00:00","2025-11-08T00:00:00","2025-11-24T00:00:00","2025-11-30T00:00:00","2025-12-04T00:00:00","2025-12-08T00:00:00","2025-12-15T00:00:00","2025-12-21T00:00:00","2025-12-26T00:00:00","2025-12-30T00:00:00","2026-01-04T00:00:00","2026-01-07T00:00:00","2026-01-17T00:00:00","2026-01-25T00:00:00","2026-02-01T00:00:00","2026-02-07T00:00:00","2026-02-10T00:00:00","2026-02-23T00:00:00","2026-03-01T00:00:00","2026-03-04T00:00:00","2026-03-15T00:00:00","2026-03-20T00:00:00","2026-04-13T00:00:00","2026-04-18T00:00:00"],"y":{"dtype":"f8","bdata":"9Wc\u002fUkQG9j9O7ncoCnT6P2WlSSnoFhBA2\u002fl+arz0\u002fz\u002fesG1RZoP1P3iXi\u002fhOTAZA\u002fyH99nXg\u002fj+pvB3htOAEQPbRqSufZf8\u002fHXIz3IDP+D\u002fl1TkGZK\u002f1P1RSJ6CJMAJAoBUYsroVAUDY9Qt2wzYCQMcuUb01MBBA\u002fIwLB0KyCUAOoUrNHuj9PzElkuhlFPI\u002flSu8y0V88z\u002fuJY3ROir\u002fP4mYEkn0MgRATGw+rg2VCEBFgT6RJ8n2PzoGZK93f\u002f0\u002fM+GX+nlTAUAlQE0tW+v0P\u002fXb14FzRvc\u002f98d71crEAkBKXp1jQHb\u002fP0SoUrMH2vo\u002fFeP8TShE\u002fD\u002fO34RCBJwHQOW4UzpYf\u002fQ\u002f"},"type":"scatter"},{"fill":"tonexty","fillcolor":"rgba(231,76,60,0.18)","hoverinfo":"skip","line":{"color":"rgba(0,0,0,0)"},"showlegend":false,"x":["2025-08-17T00:00:00","2025-08-24T00:00:00","2025-08-30T00:00:00","2025-09-14T00:00:00","2025-09-20T00:00:00","2025-09-27T00:00:00","2025-10-04T00:00:00","2025-10-19T00:00:00","2025-10-25T00:00:00","2025-11-01T00:00:00","2025-11-08T00:00:00","2025-11-24T00:00:00","2025-11-30T00:00:00","2025-12-04T00:00:00","2025-12-08T00:00:00","2025-12-15T00:00:00","2025-12-21T00:00:00","2025-12-26T00:00:00","2025-12-30T00:00:00","2026-01-04T00:00:00","2026-01-07T00:00:00","2026-01-17T00:00:00","2026-01-25T00:00:00","2026-02-01T00:00:00","2026-02-07T00:00:00","2026-02-10T00:00:00","2026-02-23T00:00:00","2026-03-01T00:00:00","2026-03-04T00:00:00","2026-03-15T00:00:00","2026-03-20T00:00:00","2026-04-13T00:00:00","2026-04-18T00:00:00"],"y":{"dtype":"f8","bdata":"9Wc\u002fUkQG9j94KAr0ibz4P2WlSSnoFhBAkX77OnBO+D\u002fesG1RZoP1PxZNZyeD4wFA\u002fyH99nXg\u002fj857pQO1j8EQPbRqSufZf8\u002fqB3+mqxR7T\u002f7IMuCiT\u002fqP1RSJ6CJMAJAo0CfyJOk9z\u002fY9Qt2wzYCQMcuUb01MBBA\u002fIwLB0KyCUDl8h\u002fSb9\u002f0Px\u002fylqsfG+4\u002f\u002fn3GhQMh8j\u002fuJY3ROir\u002fP4mYEkn0MgRATGw+rg2VCECbHD7pRILkPzoGZK93f\u002f0\u002fM+GX+nlTAUCnO088Z4vnP\u002fXb14FzRvc\u002f98d71crEAkBq9kArMOT8P0SoUrMH2vo\u002fyhr1EI3u+z9F2PD0Stn1PyWVKeYg6Ns\u002f"},"type":"scatter"},{"customdata":[["Arsenal",0,1,"Amorim"],["Fulham",1,1,"Amorim"],["Burnley",3,2,"Amorim"],["Manchester City",0,3,"Amorim"],["Chelsea",2,1,"Amorim"],["Brentford",1,3,"Amorim"],["Sunderland",2,0,"Amorim"],["Liverpool",2,1,"Amorim"],["Brighton",4,2,"Amorim"],["Nottingham Forest",2,2,"Amorim"],["Tottenham",2,2,"Amorim"],["Everton",0,1,"Amorim"],["Crystal Palace",2,1,"Amorim"],["West Ham",1,1,"Amorim"],["Wolverhampton Wanderers",4,1,"Amorim"],["Bournemouth",4,4,"Amorim"],["Aston Villa",1,2,"Amorim"],["Newcastle United",1,0,"Amorim"],["Wolverhampton Wanderers",1,1,"Amorim"],["Leeds",1,1,"Amorim"],["Burnley",2,2,"Fletcher"],["Manchester City",2,0,"Carrick"],["Arsenal",3,2,"Carrick"],["Fulham",3,2,"Carrick"],["Tottenham",2,0,"Carrick"],["West Ham",1,1,"Carrick"],["Everton",1,0,"Carrick"],["Crystal Palace",2,1,"Carrick"],["Newcastle United",1,2,"Carrick"],["Aston Villa",3,1,"Carrick"],["Bournemouth",2,2,"Carrick"],["Leeds",1,2,"Carrick"],["Chelsea",1,0,"Carrick"]],"hovertemplate":"\u003cb\u003evs %{customdata[0]}\u003c\u002fb\u003e  %{x|%d %b}\u003cbr\u003exG For: \u003cb\u003e%{y:.2f}\u003c\u002fb\u003e  |  Score: %{customdata[1]}–%{customdata[2]}\u003cbr\u003eManager: %{customdata[3]}\u003cextra\u003e\u003c\u002fextra\u003e","line":{"color":"#27ae60","width":2.5},"marker":{"color":"#27ae60","line":{"color":"white","width":1},"size":7},"mode":"lines+markers","name":"xG For","x":["2025-08-17T00:00:00","2025-08-24T00:00:00","2025-08-30T00:00:00","2025-09-14T00:00:00","2025-09-20T00:00:00","2025-09-27T00:00:00","2025-10-04T00:00:00","2025-10-19T00:00:00","2025-10-25T00:00:00","2025-11-01T00:00:00","2025-11-08T00:00:00","2025-11-24T00:00:00","2025-11-30T00:00:00","2025-12-04T00:00:00","2025-12-08T00:00:00","2025-12-15T00:00:00","2025-12-21T00:00:00","2025-12-26T00:00:00","2025-12-30T00:00:00","2026-01-04T00:00:00","2026-01-07T00:00:00","2026-01-17T00:00:00","2026-01-25T00:00:00","2026-02-01T00:00:00","2026-02-07T00:00:00","2026-02-10T00:00:00","2026-02-23T00:00:00","2026-03-01T00:00:00","2026-03-04T00:00:00","2026-03-15T00:00:00","2026-03-20T00:00:00","2026-04-13T00:00:00","2026-04-18T00:00:00"],"y":{"dtype":"f8","bdata":"9Wc\u002fUkQG9j94KAr0ibz4P2WlSSnoFhBAkX77OnBO+D\u002fesG1RZoP1PxZNZyeD4wFA\u002fyH99nXg\u002fj857pQO1j8EQPbRqSufZf8\u002fqB3+mqxR7T\u002f7IMuCiT\u002fqP1RSJ6CJMAJAo0CfyJOk9z\u002fY9Qt2wzYCQMcuUb01MBBA\u002fIwLB0KyCUDl8h\u002fSb9\u002f0Px\u002fylqsfG+4\u002f\u002fn3GhQMh8j\u002fuJY3ROir\u002fP4mYEkn0MgRATGw+rg2VCECbHD7pRILkPzoGZK93f\u002f0\u002fM+GX+nlTAUCnO088Z4vnP\u002fXb14FzRvc\u002f98d71crEAkBq9kArMOT8P0SoUrMH2vo\u002fyhr1EI3u+z9F2PD0Stn1PyWVKeYg6Ns\u002f"},"type":"scatter"},{"customdata":[["Arsenal",0,1,"Amorim"],["Fulham",1,1,"Amorim"],["Burnley",3,2,"Amorim"],["Manchester City",0,3,"Amorim"],["Chelsea",2,1,"Amorim"],["Brentford",1,3,"Amorim"],["Sunderland",2,0,"Amorim"],["Liverpool",2,1,"Amorim"],["Brighton",4,2,"Amorim"],["Nottingham Forest",2,2,"Amorim"],["Tottenham",2,2,"Amorim"],["Everton",0,1,"Amorim"],["Crystal Palace",2,1,"Amorim"],["West Ham",1,1,"Amorim"],["Wolverhampton Wanderers",4,1,"Amorim"],["Bournemouth",4,4,"Amorim"],["Aston Villa",1,2,"Amorim"],["Newcastle United",1,0,"Amorim"],["Wolverhampton Wanderers",1,1,"Amorim"],["Leeds",1,1,"Amorim"],["Burnley",2,2,"Fletcher"],["Manchester City",2,0,"Carrick"],["Arsenal",3,2,"Carrick"],["Fulham",3,2,"Carrick"],["Tottenham",2,0,"Carrick"],["West Ham",1,1,"Carrick"],["Everton",1,0,"Carrick"],["Crystal Palace",2,1,"Carrick"],["Newcastle United",1,2,"Carrick"],["Aston Villa",3,1,"Carrick"],["Bournemouth",2,2,"Carrick"],["Leeds",1,2,"Carrick"],["Chelsea",1,0,"Carrick"]],"hovertemplate":"\u003cb\u003evs %{customdata[0]}\u003c\u002fb\u003e  %{x|%d %b}\u003cbr\u003exG Against: \u003cb\u003e%{y:.2f}\u003c\u002fb\u003e  |  Score: %{customdata[1]}–%{customdata[2]}\u003cbr\u003eManager: %{customdata[3]}\u003cextra\u003e\u003c\u002fextra\u003e","line":{"color":"#c0392b","width":2.5},"marker":{"color":"#c0392b","line":{"color":"white","width":1},"size":7},"mode":"lines+markers","name":"xG Against","x":["2025-08-17T00:00:00","2025-08-24T00:00:00","2025-08-30T00:00:00","2025-09-14T00:00:00","2025-09-20T00:00:00","2025-09-27T00:00:00","2025-10-04T00:00:00","2025-10-19T00:00:00","2025-10-25T00:00:00","2025-11-01T00:00:00","2025-11-08T00:00:00","2025-11-24T00:00:00","2025-11-30T00:00:00","2025-12-04T00:00:00","2025-12-08T00:00:00","2025-12-15T00:00:00","2025-12-21T00:00:00","2025-12-26T00:00:00","2025-12-30T00:00:00","2026-01-04T00:00:00","2026-01-07T00:00:00","2026-01-17T00:00:00","2026-01-25T00:00:00","2026-02-01T00:00:00","2026-02-07T00:00:00","2026-02-10T00:00:00","2026-02-23T00:00:00","2026-03-01T00:00:00","2026-03-04T00:00:00","2026-03-15T00:00:00","2026-03-20T00:00:00","2026-04-13T00:00:00","2026-04-18T00:00:00"],"y":{"dtype":"f8","bdata":"DJOpglFJ9T9O7ncoCnT6P5y\u002fCYUIOPU\u002f2\u002fl+arz0\u002fz8wStBf6BHeP3iXi\u002fhOTAZA\u002f12fOevT6T+pvB3htOAEQJbRyOcVT+4\u002fHXIz3IDP+D\u002fl1TkGZK\u002f1Pzrq6Lga2cM\u002foBUYsroVAUAmGTkLe9r1Pxam7zUEx9A\u002fVACMZ9DQAkAOoUrNHuj9PzElkuhlFPI\u002flSu8y0V88z9Ma9PYXgvvP\u002fUQje4gdtQ\u002fou4DkNrE2D9FgT6RJ8n2P6JinL8Jhfs\u002fRBmqYir94j8lQE0tW+v0PwBUceMW8+E\u002fKnPzjeie2D9KXp1jQHb\u002fP+UK73IRX\u002fM\u002fFeP8TShE\u002fD\u002fO34RCBJwHQOW4UzpYf\u002fQ\u002f"},"type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"shapes":[{"line":{"color":"rgba(46,204,113,0.45)","dash":"dot","width":1},"type":"line","x0":0,"x1":1,"xref":"x domain","y0":1.6646460774410776,"y1":1.6646460774410776,"yref":"y"},{"line":{"color":"rgba(231,76,60,0.45)","dash":"dot","width":1},"type":"line","x0":0,"x1":1,"xref":"x domain","y0":1.3552390343434342,"y1":1.3552390343434342,"yref":"y"},{"fillcolor":"rgba(241,196,15,0.15)","layer":"below","line":{"width":0},"type":"rect","x0":"2025-12-21","x1":"2026-01-07","y0":0,"y1":1,"yref":"paper"},{"line":{"color":"#e74c3c","dash":"dash","width":1.5},"type":"line","x0":"2026-01-05","x1":"2026-01-05","y0":0,"y1":1,"yref":"paper"},{"line":{"color":"#27ae60","dash":"dash","width":1.5},"type":"line","x0":"2026-01-13","x1":"2026-01-13","y0":0,"y1":1,"yref":"paper"}],"annotations":[{"font":{"color":"rgba(46,204,113,0.8)","size":9},"showarrow":false,"text":"Lg avg xG for 1.66","x":1,"xanchor":"left","xref":"x domain","y":1.6646460774410776,"yanchor":"middle","yref":"y"},{"font":{"color":"rgba(231,76,60,0.8)","size":9},"showarrow":false,"text":"Lg avg xG ag 1.36","x":1,"xanchor":"left","xref":"x domain","y":1.3552390343434342,"yanchor":"middle","yref":"y"},{"bgcolor":"rgba(255,255,255,0.6)","font":{"color":"#b7950b","size":10},"showarrow":false,"text":"Amad + Mbeumo at AFCON","x":"2025-12-21","xanchor":"left","y":0.99,"yanchor":"top","yref":"paper"},{"font":{"color":"#e74c3c","size":10},"showarrow":false,"text":"Amorim sacked","textangle":-90,"x":"2026-01-05","xanchor":"right","y":0.02,"yanchor":"bottom","yref":"paper"},{"font":{"color":"#27ae60","size":10},"showarrow":false,"text":"Carrick in","textangle":-90,"x":"2026-01-13","xanchor":"right","y":0.02,"yanchor":"bottom","yref":"paper"}],"font":{"family":"Helvetica Neue, Arial, sans-serif","size":12,"color":"#1a1a1a"},"hoverlabel":{"font":{"size":12,"color":"#1a1a1a"},"bgcolor":"white","bordercolor":"#e5e5e5"},"margin":{"t":30,"b":50,"l":60,"r":140},"xaxis":{"title":{},"showgrid":false,"zeroline":false,"color":"#777"},"yaxis":{"title":{"text":"Expected Goals (xG)","font":{"color":"#777"}},"showgrid":true,"gridcolor":"#e5e5e5","zeroline":false},"legend":{"orientation":"h","yanchor":"bottom","y":1.01,"xanchor":"left","x":0},"plot_bgcolor":"rgba(0,0,0,0)","paper_bgcolor":"rgba(0,0,0,0)","hovermode":"x unified","height":460},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div>
+<div class="chart-caption">
+    xG for and against per match across the 2025/26 season. Vertical lines mark Amorim's sacking
+    (red) and Carrick's appointment (green). The shaded region is the AFCON window.
+    X markers show matches where Amad or Mbeumo were absent.
+</div>
+</div>
+
+<h2>The Points Picture — and What Lies Beneath It</h2>
+
+<p>
+    On raw points, the contrast is stark. Under Amorim, United averaged
+    <strong>1.55 points per game</strong>
+    across 20 matches. Under Carrick, that rises to
+    <strong>2.17 points per game</strong> across 12 matches.
+    But points alone conflate performance quality with result luck.
+</p>
+
+<div class="stat-row">
+    <div class="stat-card red">
+        <div class="value">31</div>
+        <div class="label">Amorim — actual pts (20 games)</div>
+    </div>
+    <div class="stat-card red">
+        <div class="value">32.9</div>
+        <div class="label">Amorim — xPts deserved</div>
+    </div>
+    <div class="stat-card green">
+        <div class="value">26</div>
+        <div class="label">Carrick — actual pts (12 games)</div>
+    </div>
+    <div class="stat-card green">
+        <div class="value">18.6</div>
+        <div class="label">Carrick — xPts deserved</div>
+    </div>
+</div>
+
+<p>
+    Amorim's actual points (31) tracked his deserved points (32.9) almost exactly —
+    he was getting roughly what his performances merited. Carrick's 26 actual points
+    from 12 games, however, represent a massive over-performance on his xPts of 18.6.
+    That is a <strong>+7.4 point gap</strong> in just 12 matches — the kind of number
+    that typically regresses over a full season.
+</p>
+
+<div class="chart-block">
+<div>                            <div id="d7bf4396-806d-4482-86e7-9e2857aa2772" class="plotly-graph-div" style="height:460px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("d7bf4396-806d-4482-86e7-9e2857aa2772")) {                    Plotly.newPlot(                        "d7bf4396-806d-4482-86e7-9e2857aa2772",                        [{"hovertemplate":"%{x|%d %b}\u003cbr\u003ePoisson xPts: \u003cb\u003e%{y:.1f}\u003c\u002fb\u003e\u003cextra\u003e\u003c\u002fextra\u003e","line":{"color":"#bdc3c7","dash":"dot","width":2},"mode":"lines","name":"xPts — Poisson","x":["2025-08-17T00:00:00","2025-08-24T00:00:00","2025-08-30T00:00:00","2025-09-14T00:00:00","2025-09-20T00:00:00","2025-09-27T00:00:00","2025-10-04T00:00:00","2025-10-19T00:00:00","2025-10-25T00:00:00","2025-11-01T00:00:00","2025-11-08T00:00:00","2025-11-24T00:00:00","2025-11-30T00:00:00","2025-12-04T00:00:00","2025-12-08T00:00:00","2025-12-15T00:00:00","2025-12-21T00:00:00","2025-12-26T00:00:00","2025-12-30T00:00:00","2026-01-04T00:00:00","2026-01-07T00:00:00","2026-01-17T00:00:00","2026-01-25T00:00:00","2026-02-01T00:00:00","2026-02-07T00:00:00","2026-02-10T00:00:00","2026-02-23T00:00:00","2026-03-01T00:00:00","2026-03-04T00:00:00","2026-03-15T00:00:00","2026-03-20T00:00:00","2026-04-13T00:00:00","2026-04-18T00:00:00"],"y":{"dtype":"f8","bdata":"RtoAYqhy9j8G0QhC+rwFQBA6k6pYNRVAn9DKZHOcGUDtHNLaqeUgQOw9G1JtJiNA1YQZ\u002fStnJ0ByoU5+GyQqQKMTG+kgOy5AwOYyQRgKMEAfwGaKyf8wQG1+rEfYszNAmaKWO5e0NEBcuYxnPKQ2QNNgAmSHjDlAUlxhYF9iO0AP0rQhmWk8QK+Og7a5nT1ARkbzlP7pPkDyxLTyrXdAQNYNJ6UDzkFAhbfhjXUvQ0AxTCxLmJJDQKxnmnwnTkRAfu2sN6h\u002fRUD93B85J\u002fVFQCKMBm1K+kZAwks5S01FSEAPgwCrcetIQJWWk9TUw0lAjBRi2fRzSkCnqRu2\u002f8BKQJdhvR8bF0tA"},"type":"scatter"},{"hovertemplate":"%{x|%d %b}\u003cbr\u003eEmpirical xPts: \u003cb\u003e%{y:.1f}\u003c\u002fb\u003e\u003cextra\u003e\u003c\u002fextra\u003e","line":{"color":"#2980b9","dash":"dash","width":2},"mode":"lines","name":"xPts — Empirical","x":["2025-08-17T00:00:00","2025-08-24T00:00:00","2025-08-30T00:00:00","2025-09-14T00:00:00","2025-09-20T00:00:00","2025-09-27T00:00:00","2025-10-04T00:00:00","2025-10-19T00:00:00","2025-10-25T00:00:00","2025-11-01T00:00:00","2025-11-08T00:00:00","2025-11-24T00:00:00","2025-11-30T00:00:00","2025-12-04T00:00:00","2025-12-08T00:00:00","2025-12-15T00:00:00","2025-12-21T00:00:00","2025-12-26T00:00:00","2025-12-30T00:00:00","2026-01-04T00:00:00","2026-01-07T00:00:00","2026-01-17T00:00:00","2026-01-25T00:00:00","2026-02-01T00:00:00","2026-02-07T00:00:00","2026-02-10T00:00:00","2026-02-23T00:00:00","2026-03-01T00:00:00","2026-03-04T00:00:00","2026-03-15T00:00:00","2026-03-20T00:00:00","2026-04-13T00:00:00","2026-04-18T00:00:00"],"y":{"dtype":"f8","bdata":"4QcvHKzZ9T88u3HDxioFQBNt7WdyexVAVDUmaZewGUBL38Bs73kgQBX39fZZfiJAB2JBsmCCJkBDKYKjjS0pQJy\u002f0Tg8GS1A89DBXKcFL0BXcZbX64YwQHOPaZjW8jJAsyD\u002fDcfkM0DoNADRHdY1QAbyPcDUrzhAQHlIfISwOkBEqr0ggbA7QBZAeNJI5jxAO384OzItPkAKp4hj6w5AQJ0QA8L4S0FAJPYBummeQkA31hqQ4A9DQOq5RgYSyENANisUcmLlREAJe1H+5GRFQILdEpY9UEZAZlxaZpOBR0A0xBaUTSJIQFb3zrmq80hAq3cx64KfSUCc4imUC95JQP3c9zEQTEpA"},"type":"scatter"},{"hovertemplate":"\u003cb\u003eAmorim\u003c\u002fb\u003e\u003cbr\u003e%{x|%d %b}\u003cbr\u003eCumulative pts: \u003cb\u003e%{y}\u003c\u002fb\u003e\u003cextra\u003e\u003c\u002fextra\u003e","line":{"color":"#c0392b","width":3},"marker":{"color":"#c0392b","line":{"color":"white","width":1.5},"size":7},"mode":"lines+markers","name":"Amorim","x":["2025-08-17T00:00:00","2025-08-24T00:00:00","2025-08-30T00:00:00","2025-09-14T00:00:00","2025-09-20T00:00:00","2025-09-27T00:00:00","2025-10-04T00:00:00","2025-10-19T00:00:00","2025-10-25T00:00:00","2025-11-01T00:00:00","2025-11-08T00:00:00","2025-11-24T00:00:00","2025-11-30T00:00:00","2025-12-04T00:00:00","2025-12-08T00:00:00","2025-12-15T00:00:00","2025-12-21T00:00:00","2025-12-26T00:00:00","2025-12-30T00:00:00","2026-01-04T00:00:00"],"y":{"dtype":"i1","bdata":"AAEEBAcHCg0QERISFRYZGhodHh8="},"type":"scatter"},{"hovertemplate":"\u003cb\u003eFletcher\u003c\u002fb\u003e\u003cbr\u003e%{x|%d %b}\u003cbr\u003eCumulative pts: \u003cb\u003e%{y}\u003c\u002fb\u003e\u003cextra\u003e\u003c\u002fextra\u003e","line":{"color":"#e67e22","width":3},"marker":{"color":"#e67e22","line":{"color":"white","width":1.5},"size":7},"mode":"lines+markers","name":"Fletcher","x":["2026-01-04T00:00:00","2026-01-07T00:00:00"],"y":{"dtype":"i1","bdata":"HyA="},"type":"scatter"},{"hovertemplate":"\u003cb\u003eCarrick\u003c\u002fb\u003e\u003cbr\u003e%{x|%d %b}\u003cbr\u003eCumulative pts: \u003cb\u003e%{y}\u003c\u002fb\u003e\u003cextra\u003e\u003c\u002fextra\u003e","line":{"color":"#27ae60","width":3},"marker":{"color":"#27ae60","line":{"color":"white","width":1.5},"size":7},"mode":"lines+markers","name":"Carrick","x":["2026-01-07T00:00:00","2026-01-17T00:00:00","2026-01-25T00:00:00","2026-02-01T00:00:00","2026-02-07T00:00:00","2026-02-10T00:00:00","2026-02-23T00:00:00","2026-03-01T00:00:00","2026-03-04T00:00:00","2026-03-15T00:00:00","2026-03-20T00:00:00","2026-04-13T00:00:00","2026-04-18T00:00:00"],"y":{"dtype":"i1","bdata":"ICMmKSwtMDMzNjc3Og=="},"type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"shapes":[{"line":{"color":"#e74c3c","dash":"dash","width":1.5},"type":"line","x0":"2026-01-05","x1":"2026-01-05","y0":0,"y1":1,"yref":"paper"},{"line":{"color":"#27ae60","dash":"dash","width":1.5},"type":"line","x0":"2026-01-13","x1":"2026-01-13","y0":0,"y1":1,"yref":"paper"},{"fillcolor":"rgba(241,196,15,0.15)","layer":"below","line":{"width":0},"type":"rect","x0":"2025-12-21","x1":"2026-01-07","y0":0,"y1":1,"yref":"paper"}],"annotations":[{"font":{"color":"#e74c3c","size":10},"showarrow":false,"text":"Amorim sacked","textangle":-90,"x":"2026-01-05","xanchor":"right","y":0.02,"yanchor":"bottom","yref":"paper"},{"font":{"color":"#27ae60","size":10},"showarrow":false,"text":"Carrick in","textangle":-90,"x":"2026-01-13","xanchor":"right","y":0.02,"yanchor":"bottom","yref":"paper"},{"bgcolor":"rgba(255,255,255,0.6)","font":{"color":"#b7950b","size":10},"showarrow":false,"text":"Amad + Mbeumo at AFCON","x":"2025-12-21","xanchor":"left","y":0.99,"yanchor":"top","yref":"paper"}],"font":{"family":"Helvetica Neue, Arial, sans-serif","size":12,"color":"#1a1a1a"},"hoverlabel":{"font":{"size":12,"color":"#1a1a1a"},"bgcolor":"white","bordercolor":"#e5e5e5"},"margin":{"t":30,"b":50,"l":60,"r":40},"xaxis":{"title":{},"showgrid":false,"color":"#777"},"yaxis":{"title":{"text":"Cumulative Points","font":{"color":"#777"}},"showgrid":true,"gridcolor":"#e5e5e5","zeroline":false},"legend":{"orientation":"h","yanchor":"bottom","y":1.01,"xanchor":"left","x":0},"plot_bgcolor":"rgba(0,0,0,0)","paper_bgcolor":"rgba(0,0,0,0)","hovermode":"x unified","height":460},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div>
+<div class="chart-caption">
+    Cumulative actual points (solid lines) vs cumulative xPts (dotted lines), coloured by manager era.
+    A widening gap between solid and dotted means over-performing xG — getting more points than the
+    underlying performances deserve.
+</div>
+</div>
+
+<h2>Did AFCON Hurt Amorim?</h2>
+
+<p>
+    The AFCON window cost United four league matches under Amorim without Amad Diallo
+    and Bryan Mbeumo. Looking at those matches in isolation, the drop in performance
+    quality is significant.
+</p>
+
+<div class="stat-row">
+    <div class="stat-card red">
+        <div class="value">1.71</div>
+        <div class="label">Amorim (full squad) — xPts/game</div>
+    </div>
+    <div class="stat-card grey">
+        <div class="value">1.39</div>
+        <div class="label">Amorim (AFCON depleted) — xPts/game</div>
+    </div>
+    <div class="stat-card green">
+        <div class="value">1.55</div>
+        <div class="label">Carrick (full squad) — xPts/game</div>
+    </div>
+</div>
+
+<p>
+    With a full squad, Amorim's United generated <strong>1.71 xPts per game</strong>
+    — a solid number that reflects a team creating and conceding chances at reasonable rates.
+    Without Amad and Mbeumo, that drops to <strong>1.39 xPts per game</strong>,
+    with the xGD collapsing from +0.65 to +0.03.
+    The team went from winning the xG battle to barely breaking even over those four matches.
+</p>
+
+<p>
+    Yes — AFCON hurt Amorim. But it is also true that the AFCON window coincided with
+    the final weeks of a manager whose authority was already eroding. Whether a fully
+    fit squad would have saved his job is a counterfactual the data cannot answer.
+</p>
+
+<div class="chart-block">
+<div>                            <div id="0a010daa-c84b-45c2-b2bb-d561dcd824cb" class="plotly-graph-div" style="height:440px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("0a010daa-c84b-45c2-b2bb-d561dcd824cb")) {                    Plotly.newPlot(                        "0a010daa-c84b-45c2-b2bb-d561dcd824cb",                        [{"hovertemplate":"\u003cb\u003eAmorim (full squad)\u003c\u002fb\u003e\u003cbr\u003en=16 matches\u003cbr\u003ePoisson xPts\u002fg: %{y:.2f}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Amorim (full squad)","marker":{"color":"#c0392b","line":{"width":0}},"name":"Amorim (full squad)","showlegend":true,"x":["Amorim (full squad)"],"y":[1.71],"type":"bar","xaxis":"x","yaxis":"y"},{"hovertemplate":"\u003cb\u003eAmorim (full squad)\u003c\u002fb\u003e\u003cbr\u003en=16 matches\u003cbr\u003eEmpirical xPts\u002fg: %{y:.2f}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Amorim (full squad)","marker":{"color":"#c0392b","line":{"width":0},"pattern":{"shape":"\u002f"}},"name":"Amorim (full squad)","opacity":0.45,"showlegend":false,"x":["Amorim (full squad)"],"y":[1.67],"type":"bar","xaxis":"x","yaxis":"y"},{"hovertemplate":"\u003cb\u003eAmorim (full squad)\u003c\u002fb\u003e\u003cbr\u003en=16 matches\u003cbr\u003exGD\u002fg: %{y:.2f}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Amorim (full squad)","marker":{"color":"#c0392b","line":{"width":0}},"name":"Amorim (full squad)","showlegend":false,"x":["Amorim (full squad)"],"y":[0.65],"type":"bar","xaxis":"x2","yaxis":"y2"},{"hovertemplate":"\u003cb\u003eAmorim (AFCON depleted)\u003c\u002fb\u003e\u003cbr\u003en=4 matches\u003cbr\u003ePoisson xPts\u002fg: %{y:.2f}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Amorim (AFCON depleted)","marker":{"color":"#e8a09a","line":{"width":0}},"name":"Amorim (AFCON depleted)","showlegend":true,"x":["Amorim (AFCON depleted)"],"y":[1.39],"type":"bar","xaxis":"x","yaxis":"y"},{"hovertemplate":"\u003cb\u003eAmorim (AFCON depleted)\u003c\u002fb\u003e\u003cbr\u003en=4 matches\u003cbr\u003eEmpirical xPts\u002fg: %{y:.2f}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Amorim (AFCON depleted)","marker":{"color":"#e8a09a","line":{"width":0},"pattern":{"shape":"\u002f"}},"name":"Amorim (AFCON depleted)","opacity":0.45,"showlegend":false,"x":["Amorim (AFCON depleted)"],"y":[1.36],"type":"bar","xaxis":"x","yaxis":"y"},{"hovertemplate":"\u003cb\u003eAmorim (AFCON depleted)\u003c\u002fb\u003e\u003cbr\u003en=4 matches\u003cbr\u003exGD\u002fg: %{y:.2f}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Amorim (AFCON depleted)","marker":{"color":"#e8a09a","line":{"width":0}},"name":"Amorim (AFCON depleted)","showlegend":false,"x":["Amorim (AFCON depleted)"],"y":[0.03],"type":"bar","xaxis":"x2","yaxis":"y2"},{"hovertemplate":"\u003cb\u003eCarrick (full squad)\u003c\u002fb\u003e\u003cbr\u003en=12 matches\u003cbr\u003ePoisson xPts\u002fg: %{y:.2f}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Carrick (full squad)","marker":{"color":"#27ae60","line":{"width":0}},"name":"Carrick (full squad)","showlegend":true,"x":["Carrick (full squad)"],"y":[1.55],"type":"bar","xaxis":"x","yaxis":"y"},{"hovertemplate":"\u003cb\u003eCarrick (full squad)\u003c\u002fb\u003e\u003cbr\u003en=12 matches\u003cbr\u003eEmpirical xPts\u002fg: %{y:.2f}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Carrick (full squad)","marker":{"color":"#27ae60","line":{"width":0},"pattern":{"shape":"\u002f"}},"name":"Carrick (full squad)","opacity":0.45,"showlegend":false,"x":["Carrick (full squad)"],"y":[1.5],"type":"bar","xaxis":"x","yaxis":"y"},{"hovertemplate":"\u003cb\u003eCarrick (full squad)\u003c\u002fb\u003e\u003cbr\u003en=12 matches\u003cbr\u003exGD\u002fg: %{y:.2f}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Carrick (full squad)","marker":{"color":"#27ae60","line":{"width":0}},"name":"Carrick (full squad)","showlegend":false,"x":["Carrick (full squad)"],"y":[0.31],"type":"bar","xaxis":"x2","yaxis":"y2"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,0.43],"showticklabels":false},"yaxis":{"anchor":"x","domain":[0.0,1.0],"showgrid":true,"gridcolor":"#e5e5e5","zeroline":false,"title":{"font":{"color":"#777"},"text":"xPts \u002f game"}},"xaxis2":{"anchor":"y2","domain":[0.5700000000000001,1.0],"showticklabels":false},"yaxis2":{"anchor":"x2","domain":[0.0,1.0],"showgrid":true,"gridcolor":"#e5e5e5","zeroline":false,"title":{"font":{"color":"#777"},"text":"xGD \u002f game"}},"annotations":[{"font":{"size":16},"showarrow":false,"text":"xPts per Game","x":0.215,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"xGD per Game","x":0.785,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{"color":"#555","size":9},"showarrow":false,"text":"Actual: 1.62","x":"Amorim (full squad)","xanchor":"center","xref":"x","y":1.761516739354711,"yanchor":"bottom","yref":"y"},{"font":{"color":"#555","size":9},"showarrow":false,"text":"Actual: 1.25","x":"Amorim (AFCON depleted)","xanchor":"center","xref":"x","y":1.4376820360414,"yanchor":"bottom","yref":"y"},{"font":{"color":"#555","size":9},"showarrow":false,"text":"Actual: 2.17","x":"Carrick (full squad)","xanchor":"center","xref":"x","y":1.5975857514859784,"yanchor":"bottom","yref":"y"}],"shapes":[{"line":{"color":"#333","width":1},"type":"line","x0":0,"x1":1,"xref":"x2 domain","y0":0,"y1":0,"yref":"y2"}],"font":{"family":"Helvetica Neue, Arial, sans-serif","size":12,"color":"#1a1a1a"},"hoverlabel":{"font":{"size":12,"color":"#1a1a1a"},"bgcolor":"white","bordercolor":"#e5e5e5"},"legend":{"font":{"size":11},"orientation":"v","yanchor":"middle","y":0.5,"xanchor":"left","x":1.01},"margin":{"t":20,"b":40,"l":65,"r":160},"plot_bgcolor":"rgba(0,0,0,0)","paper_bgcolor":"rgba(0,0,0,0)","barmode":"group","height":440},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div>
+<div class="chart-caption">
+    Left: xPts per game (deserved performance quality) by sub-period, with actual pts/game annotated.
+    Right: xGD per game (dominance). Three sub-periods compared: Amorim with full squad,
+    Amorim during AFCON, and Carrick with full squad.
+</div>
+</div>
+
+<h2>Is Carrick Actually Doing Better?</h2>
+
+<p>
+    This is where the data delivers its most uncomfortable finding for the Carrick narrative.
+    His xPts per game (<strong>1.55</strong>) is
+    <em>lower</em> than Amorim's full-squad xPts per game (1.71).
+    His xGD per game (+0.31) is also well below Amorim's
+    full-squad figure (+0.65).
+</p>
+
+<div class="callout">
+    <strong>The headline finding:</strong> On underlying performance metrics — xPts/game and xGD/game —
+    Amorim's United with a full squad was <em>better</em> than Carrick's United.
+    Carrick's superior actual points come from a historically large over-performance
+    (+7.4 pts vs xPts in 12 games)
+    that is unlikely to sustain over a full season.
+</div>
+
+<div class="chart-block">
+<div>                            <div id="7d35f0df-ae3b-4738-91d8-9591a1a2d12b" class="plotly-graph-div" style="height:420px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("7d35f0df-ae3b-4738-91d8-9591a1a2d12b")) {                    Plotly.newPlot(                        "7d35f0df-ae3b-4738-91d8-9591a1a2d12b",                        [{"hovertemplate":"\u003cb\u003eLeague\u003c\u002fb\u003e\u003cbr\u003eResult: %{x}\u003cbr\u003eMean xGD: \u003cb\u003e%{y:.2f}\u003c\u002fb\u003e\u003cbr\u003e\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#7f8c8d","line":{"width":0}},"name":"League","width":0.22,"x":["W","D","L"],"y":{"dtype":"f8","bdata":"PQrXo3A96j8AAAAAAAAAAD0K16NwPeq\u002f"},"type":"bar"},{"hovertemplate":"\u003cb\u003eAmorim\u003c\u002fb\u003e\u003cbr\u003eResult: %{x}\u003cbr\u003eMean xGD: \u003cb\u003e%{y:.2f}\u003c\u002fb\u003e\u003cbr\u003e\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#c0392b","line":{"width":0}},"name":"Amorim","width":0.22,"x":["W","D","L"],"y":{"dtype":"f8","bdata":"H4XrUbge8T+amZmZmZnJPylcj8L1KLw\u002f"},"type":"bar"},{"hovertemplate":"\u003cb\u003eCarrick\u003c\u002fb\u003e\u003cbr\u003eResult: %{x}\u003cbr\u003eMean xGD: \u003cb\u003e%{y:.2f}\u003c\u002fb\u003e\u003cbr\u003e\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#27ae60","line":{"width":0}},"name":"Carrick","width":0.22,"x":["W","D","L"],"y":{"dtype":"f8","bdata":"UrgehetR6D8zMzMzMzPTv9ejcD0K1+u\u002f"},"type":"bar"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"shapes":[{"line":{"color":"#333","width":1},"type":"line","x0":0,"x1":1,"xref":"x domain","y0":0,"y1":0,"yref":"y"}],"font":{"family":"Helvetica Neue, Arial, sans-serif","size":12,"color":"#1a1a1a"},"hoverlabel":{"font":{"size":12,"color":"#1a1a1a"},"bgcolor":"white","bordercolor":"#e5e5e5"},"margin":{"t":30,"b":50,"l":70,"r":40},"xaxis":{"tickfont":{"size":14},"title":{},"categoryorder":"array","categoryarray":["W","D","L"],"showgrid":false,"color":"#777"},"yaxis":{"title":{"text":"Mean xGD (xG For − xG Against)","font":{"color":"#777"}},"showgrid":true,"gridcolor":"#e5e5e5","zeroline":false},"legend":{"orientation":"h","yanchor":"bottom","y":1.01,"xanchor":"left","x":0},"plot_bgcolor":"rgba(0,0,0,0)","paper_bgcolor":"rgba(0,0,0,0)","barmode":"group","bargap":0.25,"bargroupgap":0.05,"height":420},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div>
+<div class="chart-caption">
+    Average xG difference (xGD) for wins, draws, and losses — league baseline vs each manager era.
+    A positive number for wins means the team was generating better chances than they conceded
+    when they won. A negative number for losses means they were outplayed by xG.
+</div>
+</div>
+
+<h2>What We Can and Cannot Conclude</h2>
+
+<p>
+    The data supports two reasonably firm conclusions and one important caveat.
+</p>
+
+<p>
+    <strong>AFCON hurt Amorim.</strong> The performance metrics drop clearly when Amad and
+    Mbeumo were absent. Four matches is a small sample but the magnitude of the xGD shift
+    is large enough to be meaningful.
+</p>
+
+<p>
+    <strong>Carrick's points are over-performing his xG by a large margin.</strong>
+    A +7.4 point gap over 12 games is an outlier.
+    This can reflect better game management, superior finishing, or variance — but it
+    is not a stable signal of genuine improvement in underlying quality.
+</p>
+
+<p>
+    <strong>The confound cannot be resolved.</strong> Carrick took charge on 13 January.
+    Amad and Mbeumo returned on 17 January. There is exactly one Carrick match without them —
+    the 2-0 win over Manchester City — and zero Amorim matches after their return.
+    The data cannot separate the manager effect from the player availability effect,
+    and anyone claiming otherwise is overstating what 12 matches of evidence can tell us.
+</p>
+
+<div class="methodology">
+    <h3>Methodology &amp; Data Sources</h3>
+    <p>
+        Match-level xG data (home xG, away xG, scores, dates) sourced from
+        <strong>Understat</strong> via the soccerdata Python library.
+        Player lineup data (starter/bench status, minutes played) sourced from
+        <strong>FBref</strong> via soccerdata. All 33 completed Premier League matches
+        involving Manchester United in 2025/26 are included through the most recent gameweek.
+    </p>
+    <p>
+        <strong>Expected Points (xPts)</strong> are computed using an independent Poisson model:
+        goals scored by each team are assumed to follow a Poisson distribution with mean equal
+        to that team's xG. The probability of winning, drawing, and losing is derived by summing
+        over all scoreline combinations up to 10 goals per side (capturing &gt;99.9% of probability mass).
+        xPts = 3 × P(win) + 1 × P(draw).
+    </p>
+    <p>
+        <strong>AFCON availability flags</strong> are derived from the FBref lineup data:
+        a player is marked absent only if they have no recorded minutes in a match that falls
+        within the AFCON 2025 window (21 Dec 2025 – 18 Jan 2026). Non-AFCON absences
+        (injury, rotation) are not flagged. Only Amad Diallo and Bryan Mbeumo are tracked —
+        Noussair Mazraoui was excluded as his impact was judged less analytically decisive.
+    </p>
+    <p>
+        <strong>Manager periods:</strong> Amorim (to 5 Jan 2026), Fletcher (5–13 Jan 2026),
+        Carrick (13 Jan 2026 onwards). Fletcher's single match is excluded from sub-period
+        comparisons due to insufficient sample size.
+    </p>
+</div>
+
+</div>
+</body>
+</html>

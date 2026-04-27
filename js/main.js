@@ -43,16 +43,12 @@ function initNavigation() {
         });
     }
 
-    // Navbar background on scroll
+    // Navbar scroll state
     const navbar = document.querySelector('.navbar');
     if (navbar) {
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(15, 15, 35, 0.95)';
-            } else {
-                navbar.style.background = 'rgba(15, 15, 35, 0.8)';
-            }
-        });
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true });
     }
 }
 
